@@ -1,0 +1,130 @@
+#define BLYNK_TEMPLATE_ID "TMPL3Z9OVgbHz"
+#define BLYNK_TEMPLATE_NAME "iot based door lock"
+#define BLYNK_AUTH_TOKEN "-zJUZJMzZ3UOq_hI839l-JlBW2nVgtpU"
+
+
+#define BLYNK_PRINT Serial
+#include <ESP8266WiFi.h>
+#include <BlynkSimpleEsp8266.h>
+
+#define A D7
+#define B D6
+#define C D5
+#define D D4
+
+
+
+char auth[] = BLYNK_AUTH_TOKEN;
+char ssid[] = "data";
+char pass[] = "data1234";
+
+
+BLYNK_WRITE(V0) 
+
+{
+  bool value1 = param.asInt();
+  // Check these values and turn the A ON and OFF
+  if (value1 == 1) 
+  {
+    digitalWrite(A, 1);
+  
+ 
+    delay(100);
+  } 
+  else 
+  {
+    digitalWrite(A, 0);
+  
+ 
+  }
+}
+
+//Get the button values
+BLYNK_WRITE(V1) {
+  bool value2 = param.asInt();
+  // Check these values and turn the B ON and OFF
+  if (value2 == 1) {
+
+    digitalWrite(B, 1);
+  
+  
+    delay(100);
+  } 
+  else 
+  {
+  
+    digitalWrite(B, 0);
+   
+ 
+  }
+}
+
+
+BLYNK_WRITE(V2) {
+  bool value3 = param.asInt();
+  // Check these values and turn the B ON and OFF
+  if (value3 == 1)
+  {
+   
+    
+    digitalWrite(C, 1);
+  
+    
+    delay(100);
+  } 
+  else 
+  {
+   
+    digitalWrite(C, 0);
+   
+   
+  }
+}
+
+
+
+BLYNK_WRITE(V3) {
+  bool value4 = param.asInt();
+  // Check these values and turn the B ON and OFF
+  if (value4 == 1) {
+    
+    digitalWrite(D, 1);
+   
+    delay(100);
+  } 
+  else 
+  {
+   
+    digitalWrite(D, 0);
+  
+  }
+}
+
+
+void setup()
+{
+  //Set the relay pins as output pins
+  pinMode(1, FUNCTION_3);
+  pinMode(3, FUNCTION_3);
+  
+  pinMode(A, OUTPUT);
+  pinMode(B, OUTPUT);
+  pinMode(C, OUTPUT);
+  pinMode(D, OUTPUT);
+digitalWrite(A, LOW);
+digitalWrite(B, LOW);
+digitalWrite(C, LOW);
+digitalWrite(D, LOW);
+
+
+//Serial.begin(9600);
+Blynk.begin(auth, ssid, pass);
+
+}
+
+
+void loop()
+
+{
+Blynk.run();
+}
